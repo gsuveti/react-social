@@ -1,7 +1,7 @@
-# react-social
+# react-social-share
 
 > Simple [React](http://facebook.github.io/react/index.html) components for
-> social (Facebook, Twitter and Pinterest) buttons and counts.
+> social (Facebook, Twitter and Pinterest and more) buttons and counts.
 
 ## Install
 

@@ -1,7 +1,7 @@
 {
-  "name": "react-social",
-  "version": "0.1.9",
-  "description": "React social buttons, Facebook, Twitter and Pinterest",
+  "name": "react-social-share",
+  "version": "0.0.1",
+  "description": "React social buttons, Facebook, Twitter and Pinterest and more",
   "main": "react-social.js",
   "peerDependencies": {
     "react": ">=0.13.0"
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/olahol/react-social"
+    "url": "https://github.com/suvetig/react-social"
   },
   "keywords": [
     "react",
@@ -32,7 +32,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/olahol/react-social/issues"
+    "url": "https://github.com/suvetig/react-social/issues"
   },
-  "homepage": "https://github.com/olahol/react-social"
+  "homepage": "https://github.com/suvetig/react-social"
 }

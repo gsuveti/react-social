@@ -9,8 +9,6 @@
 })(this, function (React) {
   "use strict";
 
-  //test
-
   var isBrowser = function () {
     return !(typeof document === "undefined" || typeof window === "undefined");
   };
@@ -213,7 +211,7 @@
 
     , constructUrl: function () {
       return "https://cdn.api.twitter.com/1/urls/count.json?callback=@&url="
-             + encodeURIComponent(this.props.url);
+        + encodeURIComponent(this.props.url);
     }
 
     , extractCount: function (data) {
@@ -226,7 +224,7 @@
 
     , constructUrl: function () {
       return "https://api.pinterest.com/v1/urls/count.json?callback=@&url="
-             + encodeURIComponent(this.props.url);
+        + encodeURIComponent(this.props.url);
     }
 
     , extractCount: function (data) {
@@ -250,10 +248,43 @@
     mixins: [Button]
 
     , constructUrl: function () {
-      var msg = this.props.message === "" ?
-        this.props.url : this.props.message + " " + this.props.url;
-      return "https://www.facebook.com/sharer/sharer.php?u="
-             + encodeURIComponent(msg);
+      var app_id = this.props.app_id;
+      var url = this.props.url;
+
+
+      return "//www.facebook.com/dialog/share?" +
+        "app_id=" +encodeURIComponent(app_id) +
+        "&href="+ encodeURIComponent(url) +
+        "&redirect_uri=" + encodeURIComponent(url) +
+        "&display=popup";
+    }
+  });
+  exports.FacebookSendButton = React.createClass({
+    mixins: [Button]
+
+    , constructUrl: function () {
+      var app_id = this.props.app_id;
+      var url = this.props.url;
+
+
+      return "//www.facebook.com/dialog/send?" +
+        "app_id=" +encodeURIComponent(app_id) +
+        "&link="+ encodeURIComponent(url) +
+        "&redirect_uri=" + encodeURIComponent(url)
+    }
+  });
+  exports.WhatsappButton = React.createClass({
+    mixins: [Button]
+
+    , constructUrl: function () {
+      var url = this.props.url;
+      var ua = navigator.userAgent.toLowerCase();
+      var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+      if(isAndroid) {
+        return "whatsapp://send?text=Hello";
+      }
+
+      return null;
     }
   });
 
@@ -261,9 +292,23 @@
     mixins: [Button]
 
     , constructUrl: function () {
-      var msg = this.props.message === "" ?
-        this.props.url : this.props.message + " " + this.props.url;
-      return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(msg);
+      var url = this.props.url;
+
+      return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(url);
+    }
+  });
+
+  exports.GooglePlusButton = React.createClass({
+
+
+    mixins: [Button]
+
+    , constructUrl: function () {
+      var url = this.props.url;
+
+
+
+      return "https://plus.google.com/share?url=" + encodeURIComponent(url);
     }
   });
 
@@ -276,17 +321,17 @@
 
     , constructUrl: function () {
       var url = "https://pinterest.com/pin/create/button/?url="
-                + encodeURIComponent(this.props.url) + "&media="
-                + encodeURIComponent(this.props.media);
+        + encodeURIComponent(this.props.url) + "&media="
+        + encodeURIComponent(this.props.media);
       return url;
     }
   });
 
   exports.VKontakteButton = React.createClass({
-      mixins: [Button]
+    mixins: [Button]
 
     , constructUrl: function () {
-        return "http://vk.com/share.php?url=" + encodeURIComponent(this.props.url);
+      return "http://vk.com/share.php?url=" + encodeURIComponent(this.props.url);
     }
   });
 
