@@ -9,6 +9,8 @@
 })(this, function (React) {
   "use strict";
 
+  //test
+
   var isBrowser = function () {
     return !(typeof document === "undefined" || typeof window === "undefined");
   };
