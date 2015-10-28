@@ -1,6 +1,6 @@
 {
   "name": "react-social-share",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React social buttons, Facebook, Twitter and Pinterest and more",
   "main": "react-social.js",
   "peerDependencies": {
