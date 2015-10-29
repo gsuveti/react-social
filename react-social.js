@@ -278,13 +278,12 @@
 
     , constructUrl: function () {
       var url = this.props.url;
-      var ua = navigator.userAgent.toLowerCase();
-      var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-      if(isAndroid) {
-        return "whatsapp://send?text=Hello";
-      }
+      var msg = this.props.msg;
 
-      return null;
+      var message = msg + " "  + url;
+
+      return "whatsapp://send?text="+ encodeURIComponent(message);
+
     }
   });
 
@@ -293,8 +292,11 @@
 
     , constructUrl: function () {
       var url = this.props.url;
+      var msg = this.props.msg;
 
-      return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(url);
+      var message = msg + " "  + url;
+
+      return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(message);
     }
   });
 
