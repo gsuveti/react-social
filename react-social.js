@@ -174,7 +174,8 @@
     , click: function (e) {
       this.props.onClick(e);
       if (isBrowser()) {
-        window.open(this.constructUrl(), "_blank");
+        var link = this.constructUrl();
+        window.open(link.url, link.target);
       }
     }
 
@@ -252,11 +253,14 @@
       var url = this.props.url;
 
 
-      return "//www.facebook.com/dialog/share?" +
+      var link =  "//www.facebook.com/dialog/share?" +
         "app_id=" +encodeURIComponent(app_id) +
         "&href="+ encodeURIComponent(url) +
         "&redirect_uri=" + encodeURIComponent(url) +
         "&display=popup";
+
+      var target = "_blank";
+      return {"url": link,"target": target};
     }
   });
   exports.FacebookSendButton = React.createClass({
@@ -267,10 +271,13 @@
       var url = this.props.url;
 
 
-      return "//www.facebook.com/dialog/send?" +
+      var link =  "//www.facebook.com/dialog/send?" +
         "app_id=" +encodeURIComponent(app_id) +
         "&link="+ encodeURIComponent(url) +
-        "&redirect_uri=" + encodeURIComponent(url)
+        "&redirect_uri=" + encodeURIComponent(url);
+
+      var target = "_blank";
+      return {"url": link,"target": target};
     }
   });
   exports.WhatsappButton = React.createClass({
@@ -282,7 +289,9 @@
 
       var message = msg + " "  + url;
 
-      return "whatsapp://send?text="+ encodeURIComponent(message);
+      var link =  "whatsapp://send?text="+ encodeURIComponent(message);
+      var target = "_blank";
+      return {"url": link,"target": target};
 
     }
   });
@@ -291,12 +300,12 @@
     mixins: [Button]
 
     , constructUrl: function () {
-      var url = this.props.url;
-      var msg = this.props.msg;
 
-      var message = msg + " "  + url;
+      var message = this.props.msg;
 
-      return "https://twitter.com/intent/tweet?text=" + encodeURIComponent(message);
+      var link = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(message);
+      var target = "_blank";
+      return {"url": link,"target": target};
     }
   });
 
@@ -310,7 +319,9 @@
 
 
 
-      return "https://plus.google.com/share?url=" + encodeURIComponent(url);
+      var link =  "https://plus.google.com/share?url=" + encodeURIComponent(url);
+      var target = "_blank";
+      return {"url": link,"target": target};
     }
   });
 
@@ -325,7 +336,26 @@
       var url = "https://pinterest.com/pin/create/button/?url="
         + encodeURIComponent(this.props.url) + "&media="
         + encodeURIComponent(this.props.media);
-      return url;
+      var target = "_blank";
+      return {"url": url,"target": target};
+    }
+  });
+
+  exports.EmailButton = React.createClass({
+    mixins: [Button]
+
+    , propTypes: {
+      media: React.PropTypes.string.isRequired
+    }
+
+    , constructUrl: function () {
+      var message = this.props.msg+" "+this.props.url;
+      var url = "mailto:?"
+        +"subject="+ encodeURIComponent(this.props.subject)
+        +"&body="+ encodeURIComponent(message);
+
+      var target = "_self";
+      return {"url": url,"target": target};
     }
   });
 
@@ -333,7 +363,9 @@
     mixins: [Button]
 
     , constructUrl: function () {
-      return "http://vk.com/share.php?url=" + encodeURIComponent(this.props.url);
+      var url =  "http://vk.com/share.php?url=" + encodeURIComponent(this.props.url);
+      var target = "_self";
+      return {"url": url,"target": target};
     }
   });
 
